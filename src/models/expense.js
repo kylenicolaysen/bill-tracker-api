@@ -8,10 +8,12 @@ const expenseSchema = new mongoose.Schema({
   },
   amount: {
     type: Number,
-    required: false
+    required: false,
+    minimum: 0
   },
   frequency: {
-    type: String
+    type: String,
+    required: true
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,11 +25,10 @@ const expenseSchema = new mongoose.Schema({
 })
 
 expenseSchema.pre('save', function (next) {
-  console.log('pre-save expense')
-  const frequencyOption = [ 'day', 'week', 'month', 'year' ]
+  const validFrequencies = [ 'day', 'week', 'month', 'year' ]
   const expense = this
-  if(expense.isModified('frequency') && (frequencyOption.find((freq) => expense.frequency === freq) === undefined)) {
-    return next(new Error('invalid FFF'))
+  if(expense.isModified('frequency') && (validFrequencies.find((freq) => expense.frequency === freq) === undefined)) {
+    return next(new Error('invalid frequency'))
   }
   next()
 })

@@ -87,15 +87,14 @@ userSchema.pre('save', async function (next) {
 
   if(user.isModified('password')) {
     user.password = await bcrypt.hash(user.password, 8)
-  }
-  console.log('justbefore saving')
-  
+  }  
   next()
 })
 
 //Delete user expenses when user is removed
-userSchema.pre('remove', { document: true, query: false }, async function (next) {
+userSchema.pre('deleteOne', { document: true, query: false }, async function (next) {
   const user = this
+  console.log(user)
   await Expense.deleteMany({ owner: user._id })
   next()
 })
