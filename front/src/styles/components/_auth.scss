@@ -1,21 +1,22 @@
-.login__page {
+.auth__page {
+  min-height: fit-content;
   width: 90%;
   margin-left: 5%;
   padding: $l-size;
-  padding-bottom: 15rem;
+  padding-bottom: 7rem;
   border: 1px solid $text-color-medium;
 }
 
-.login__form {
+.auth__form {
   width: min-content;
 }
 
-.login__input {
+.auth__input {
   margin: $s-size;
   display: block;
 }
 
-.login__submit__button {
+.primary__submit__button {
   float: right;
   margin: 0 $s-size $s-size 0;
   padding: .5rem;
@@ -24,7 +25,7 @@
   border: none;
 }
 
-.login__signup__button {
+.secondary__submit__button {
   float: right;
   margin: 0 $s-size $s-size 0;
   padding: .5rem;
