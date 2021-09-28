@@ -1,0 +1,35 @@
+.login__page {
+  width: 90%;
+  margin-left: 5%;
+  padding: $l-size;
+  padding-bottom: 15rem;
+  border: 1px solid $text-color-medium;
+}
+
+.login__form {
+  width: min-content;
+}
+
+.login__input {
+  margin: $s-size;
+  display: block;
+}
+
+.login__submit__button {
+  float: right;
+  margin: 0 $s-size $s-size 0;
+  padding: .5rem;
+  background: $main-color;
+  color: $text-color-light;
+  border: none;
+}
+
+.login__signup__button {
+  float: right;
+  margin: 0 $s-size $s-size 0;
+  padding: .5rem;
+  background: $main-color-light;
+  color: darken($text-color-medium, 10);
+  border: none;
+  font-weight: bold;
+}

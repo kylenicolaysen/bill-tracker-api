@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { format, add, sub, parse, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isSameDay, isSameMonth } from 'date-fns'
 
 export default class Calendar extends React.Component {
@@ -31,8 +32,17 @@ export default class Calendar extends React.Component {
       currentMonth: sub(this.state.currentMonth, {months: 1})
     })
   }
-  //renders current month name and prev/next month buttons
   renderHeader() {
+    return (
+      <div className="temp">
+        <button>Add Bill</button>
+        <button>Pay Bill</button>
+        <Link to="/login"><button>Sign Out</button></Link>
+      </div>
+    )
+  }
+  //renders current month name and prev/next month buttons
+  renderCalendarHeader() {
     const dateFormat = 'MMMM yyyy'
     return (
       <div className="header row flex-middle">
@@ -123,6 +133,7 @@ export default class Calendar extends React.Component {
     return (
       <div className="calendar">
         {this.renderHeader()}
+        {this.renderCalendarHeader()}
         {this.renderDays()}
         {this.renderCells()}
       </div>

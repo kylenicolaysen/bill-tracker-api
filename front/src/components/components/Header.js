@@ -2,10 +2,8 @@ import React from 'react'
 
 const Header = () => (
   <header>
-    <h1>Bill Tracker</h1>
-    <button>Add Bill</button>
-    <button>Pay Bill</button>
-    <button>Sign Out</button>
+    <h1 classname="header__title">Bill Tracker - </h1> 
+    <h3 classname="header__title">has everyone paid their share?</h3>
   </header>
 )
 

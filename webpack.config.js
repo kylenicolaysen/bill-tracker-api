@@ -29,7 +29,12 @@ module.exports = {
     static: path.join(__dirname, 'front/public'),
     historyApiFallback: true,
     proxy: {
-      "/api": "http://localhost:3000"
-  }
+      '/api': {
+        target: 'http://localhost:3000',        
+        pathRewrite: { '^/api': '' },
+        changeOrigin: true
+        // pathRewrite: function (path, req) { return path.replace('/api', '') }
+      },
+    },
   }
 }
