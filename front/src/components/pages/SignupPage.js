@@ -1,7 +1,9 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import SignupForm from '../components/SignupForm'
+import { isAuthorized, isNotAuthorized } from '../../actions/isAuthorized'
+
 
 const SignupPage = (props) => {
   if (!props.isAuthorized) {

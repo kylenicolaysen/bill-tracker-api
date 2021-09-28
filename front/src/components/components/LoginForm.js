@@ -19,7 +19,6 @@ export default class LoginForm extends React.Component {
     })
     const data = await response.json()
     if (response.status === 400) {
-      console.log('failed')
       this.setState(() => ({ loginError: true }))
     }
     else {

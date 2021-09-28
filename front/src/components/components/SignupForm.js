@@ -12,22 +12,18 @@ export default class SignupForm extends React.Component {
     const name = e.target.elements.name.value.trim()
     const email = e.target.elements.email.value.trim().toLowerCase()
     const password = e.target.elements.password.value.trim()
-    const jason = JSON.stringify({ name, email, password })
-    console.log(jason)
     const response = await fetch('/api/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: jason
+      body: JSON.stringify({ name, email, password })
     })
     const data = await response.json()
     if (response.status === 400) {
-      console.log('failed')
       this.setState(() => ({ signupError: true }))
     }
     else {
-      console.log('pas?')
       this.setState(() => ({ signupError: false }))
       this.props.onSubmit({
         authSuccess: true,

@@ -5,7 +5,7 @@ const router =new express.Router()
 
 //CREATE NEW USER
 router.post('/user', async (req, res) => {
-  console.log(req.body)
+  console.log('SIGNUP ROUTE')
   const user = new User(req.body)
   try {
     await user.save()
@@ -24,7 +24,6 @@ router.post('/user/login', async (req, res) => {
   try {
     const user = await User.findByCredentials(req.body.email, req.body.password)
     const token = await user.generateAuthToken()
-    console.log(token)
     res.send({ user, token })
   } catch (e) {
     res.status(400).send({ Error: `Errror: ${e}` })
