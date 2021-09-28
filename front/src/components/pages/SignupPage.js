@@ -35,7 +35,7 @@ export default class SignupPage extends React.Component {
   render() {
     return (
         <div className="auth__page">
-          {this.state.loginError && <p>Invalid email or password.</p>}
+          {this.state.signupError && <p className="auth__form__error">invalid signup info provided</p>}
           <form className="auth__form" onSubmit={ this.handleLoginFormSubmit }>
             <input placeholder="Name" className="auth__input" type="text" name="username" />
             <input placeholder="Email" className="auth__input" type="text" name="email" />

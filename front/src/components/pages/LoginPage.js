@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class LoginPage extends React.Component {
   state = {
@@ -12,7 +12,6 @@ export default class LoginPage extends React.Component {
     const password = e.target.elements.password.value.trim()
     const response = await fetch('/api/user/login', {
       method: 'POST',
-      // mode: 'cors',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -26,14 +25,13 @@ export default class LoginPage extends React.Component {
     else {
       this.setState(() => ({token: data.token, loginError: false }))
       this.props.history.push('/');
-      // return <Redirect to="/" />
     }
   }
 
   render() {
     return (
         <div className="auth__page">
-          {this.state.loginError && <p>Invalid email or password.</p>}
+          {this.state.loginError && <p className="auth__form__error">invalid email or password</p>}
           <form className="auth__form" onSubmit={ this.handleLoginFormSubmit }>
             <input placeholder="Email" className="auth__input" type="text" name="email" />
             <input placeholder="Password" className="auth__input" type="password" name="password" />
