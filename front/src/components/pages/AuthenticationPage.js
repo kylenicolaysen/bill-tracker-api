@@ -1,15 +1,28 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 import { isAuthd, isNotAuthd } from '../../actions/authentication'
 
-
-const SignupPage = (props) => {
-  if (!props.isAuthenticated) {
+const LoginPage = (props) => {
+  if (!props.isAuthenticated && props.location.pathname === '/login') {
     return (
       <div>
-        <SignupForm 
+        <LoginForm
+          onSubmit={({ authSuccess, token }) => {
+            authSuccess ? 
+              props.dispatch(isAuthd(token)) : 
+              props.dispatch(isNotAuthd())
+          }}
+        />
+      </div>        
+    )
+  }
+  else if (!props.isAuthenticated && props.location.pathname === '/signup') {
+    return (
+      <div>
+        <SignupForm
           onSubmit={({ authSuccess, token }) => {
             authSuccess ? 
               props.dispatch(isAuthd(token)) : 
@@ -32,4 +45,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(SignupPage)
+export default connect(mapStateToProps)(LoginPage)

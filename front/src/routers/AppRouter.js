@@ -1,8 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import CalendarPage from '../components/pages/CalendarPage'
-import LoginPage from '../components/pages/LoginPage.js'
-import SignupPage from '../components/pages/SignupPage'
+import AuthenticationPage from '../components/pages/AuthenticationPage'
 import NotFoundPage from '../components/pages/NotFoundPage'
 import Header from '../components/components/Header'
 
@@ -12,8 +11,8 @@ const AppRouter = () => (
       <Header />
       <Switch>
         <Route path='/' component={CalendarPage} exact />
-        <Route path='/login' component={LoginPage} />
-        <Route path='/signup' component={SignupPage} />
+        <Route path='/login' component={AuthenticationPage} />
+        <Route path='/signup' component={AuthenticationPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
