@@ -1,12 +1,12 @@
 import { createStore, combineReducers } from 'redux'
 import billsReducer from '../reducers/bills'
-import authorizedReducer from '../reducers/isAuthorized'
+import authenticationReducer from '../reducers/authentication'
 
 export default () => {
   const store = createStore(
     combineReducers({
       bills: billsReducer,
-      authorization: authorizedReducer
+      authentication: authenticationReducer
     })
   )
   return store

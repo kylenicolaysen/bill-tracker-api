@@ -2,17 +2,17 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoginForm from '../components/LoginForm'
-import { isAuthorized, isNotAuthorized } from '../../actions/isAuthorized'
+import { isAuthd, isNotAuthd } from '../../actions/authentication'
 
 const LoginPage = (props) => {
-  if (!props.isAuthorized) {
+  if (!props.isAuthenticated) {
     return (
       <div>
         <LoginForm
           onSubmit={({ authSuccess, token }) => {
             authSuccess ? 
-              props.dispatch(isAuthorized(token)) : 
-              props.dispatch(isNotAuthorized())
+              props.dispatch(isAuthd(token)) : 
+              props.dispatch(isNotAuthd())
           }}
         />
       </div>        
@@ -27,7 +27,7 @@ const LoginPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthorized: state.authorization.isAuthorized
+    isAuthenticated: state.authentication.isAuthenticated
   }
 }
 
