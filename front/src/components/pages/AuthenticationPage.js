@@ -6,7 +6,12 @@ import SignupForm from '../components/SignupForm'
 import { isAuthd, isNotAuthd } from '../../actions/authentication'
 
 const LoginPage = (props) => {
-  if (!props.isAuthenticated && props.location.pathname === '/login') {
+  if(props.isAuthenticated) {
+    return (
+      <Redirect to="/" />
+    )
+  }
+  else if (props.location.pathname === '/login') {
     return (
       <div>
         <LoginForm
@@ -19,7 +24,7 @@ const LoginPage = (props) => {
       </div>        
     )
   }
-  else if (!props.isAuthenticated && props.location.pathname === '/signup') {
+  else if (props.location.pathname === '/signup') {
     return (
       <div>
         <SignupForm
@@ -30,11 +35,6 @@ const LoginPage = (props) => {
           }}
         />
       </div>        
-    )
-  }
-  else {
-    return (
-      <Redirect to="/" />
     )
   }
 }
