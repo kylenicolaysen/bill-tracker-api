@@ -9,11 +9,12 @@ const expenseSchema = new mongoose.Schema({
   amount: {
     type: Number,
     required: false,
-    minimum: 0
+    minimum: 0,
+    default: 0
   },
   frequency: {
     type: String,
-    required: true
+    required: false
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

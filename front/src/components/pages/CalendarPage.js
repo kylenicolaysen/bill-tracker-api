@@ -14,7 +14,8 @@ const CalendarPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.authentication.isAuthenticated
+    isAuthenticated: state.authentication.isAuthenticated,
+    token: state.authentication.token
   }
 }
 
