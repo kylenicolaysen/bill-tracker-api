@@ -12,7 +12,7 @@ export const addNewBill = async (token) => {
 }
 
 export const getBillById = async (token, id) => {
-  const response = await fetch('/api/expense', {
+  const response = await fetch(`/api/expense/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'applicaion/json',

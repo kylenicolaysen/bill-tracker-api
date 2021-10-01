@@ -5,22 +5,17 @@ import { getBillById } from '../../api-calls/bills'
 
 
 class EditBillPage extends React.Component {
-  state = {
-    description: ''
-
-  }
-  onComponentWillMount() {
+  state = {}
+  async componentDidMount() {
     const id = this.props.location.hash.substring(1)
-    const bill = getBillById(this.props.token, id)
-    debugger
+    const bill = await getBillById(this.props.token, id)
     console.log(bill)
-    this.setState(() => ({...bill}))
+    this.setState(() => (bill))
   }
   handleFormSubmit = () => {
     console.log('SUBMITTED')
   }
   render() {
-    console.log(`State ${this.state}`)
     if (!this.props.isAuthenticated) {
       return <Redirect to="/login" />
     }
@@ -30,15 +25,15 @@ class EditBillPage extends React.Component {
         <form className="form" onSubmit={this.handleFormSubmit}>
           <input 
             className="input" 
-            placeholder="description"
+            placeholder={this.state.description}
             type="text"
             name="description"
           />
           <input 
             className="input" 
-            placeholder="description"
+            placeholder={this.state.amount}
             type="text"
-            name="description"
+            name="amount"
           />
           <button className="submit__button">save</button>
         </form>
