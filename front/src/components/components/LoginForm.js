@@ -33,11 +33,11 @@ export default class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="auth__page">
+      <div className="page">
         {this.state.loginError && <p className="auth__form__error">invalid email or password</p>}
-        <form className="auth__form" onSubmit={ this.handleLoginFormSubmit }>
-          <input placeholder="Email" className="auth__input" type="text" name="email" />
-          <input placeholder="Password" className="auth__input" type="password" name="password" />
+        <form className="form" onSubmit={ this.handleLoginFormSubmit }>
+          <input placeholder="Email" className="input" type="text" name="email" />
+          <input placeholder="Password" className="input" type="password" name="password" />
           <button className="primary__submit__button">Login</button>
         </form>
         <Link to="/signup"><button className="secondary__submit__button">Sign Up</button></Link>

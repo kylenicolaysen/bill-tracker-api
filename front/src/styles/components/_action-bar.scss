@@ -1,0 +1,19 @@
+.action__bar {
+  background-color: $action;
+  padding: .5rem 1rem;
+}
+
+.action__bar__button {
+  padding: .5rem;
+  background-color: $main-color;
+  color: $text-color-light;
+  border: none;
+}
+
+.action__bar__button--signout {
+  float: right;
+  padding: .5rem;
+  background-color: $action;
+  color: $text-color-light;
+  border: none;
+}

@@ -1,21 +1,3 @@
-.auth__page {
-  min-height: fit-content;
-  width: 90%;
-  margin-left: 5%;
-  padding: $l-size;
-  padding-bottom: 7rem;
-  border: 1px solid $text-color-medium;
-}
-
-.auth__form {
-  width: min-content;
-}
-
-.auth__input {
-  margin: $s-size;
-  display: block;
-}
-
 .primary__submit__button {
   float: right;
   margin: 0 $s-size $s-size 0;

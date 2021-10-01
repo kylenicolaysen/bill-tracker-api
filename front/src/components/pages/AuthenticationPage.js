@@ -5,37 +5,35 @@ import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 import { isAuthd, isNotAuthd } from '../../actions/authentication'
 
-const LoginPage = (props) => {
-  if(props.isAuthenticated) {
-    return (
-      <Redirect to="/" />
-    )
+class LoginPage extends React.Component {
+  formSubmit = ({ authSuccess, token }) => {
+    authSuccess ? 
+      this.props.dispatch(isAuthd(token)) : 
+      this.props.dispatch(isNotAuthd())
   }
-  else if (props.location.pathname === '/login') {
-    return (
-      <div>
-        <LoginForm
-          onSubmit={({ authSuccess, token }) => {
-            authSuccess ? 
-              props.dispatch(isAuthd(token)) : 
-              props.dispatch(isNotAuthd())
-          }}
-        />
-      </div>        
-    )
-  }
-  else if (props.location.pathname === '/signup') {
-    return (
-      <div>
-        <SignupForm
-          onSubmit={({ authSuccess, token }) => {
-            authSuccess ? 
-              props.dispatch(isAuthd(token)) : 
-              props.dispatch(isNotAuthd())
-          }}
-        />
-      </div>        
-    )
+
+  render() {
+    if(this.props.isAuthenticated) {
+      return (
+        <Redirect to="/" />
+      )
+    }
+    else if (this.props.location.pathname === '/login') {
+      return (
+        <div>
+          <LoginForm onSubmit={this.formSubmit} />
+        </div>        
+      )
+    }
+    else if (this.props.location.pathname === '/signup') {
+      return (
+        <div>
+          <SignupForm
+            onSubmit={this.formSubmit}
+          />
+        </div>        
+      )
+    }
   }
 }
 

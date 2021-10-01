@@ -13,15 +13,6 @@ body {
     height: 100%;
 }
 
-header {
-  display: flex;
-  width: 90%;
-  margin-left: 5%;
-  padding: 1.75em $s-size;
-  border-bottom: 1px solid $text-color-medium;
-  background: $bg-color-header;
-}
-
 main {
   display: block;
   margin: 0 auto;
@@ -29,31 +20,20 @@ main {
   max-width: 50em;
 }
 
-.header__title {
-  display: inline-block;
+.page {
+  min-height: fit-content;
+  width: 90%;
+  margin-left: 5%;
+  padding: $l-size;
+  padding-bottom: 7rem;
+  border: 1px solid $text-color-medium;
 }
 
-h3 {
-  margin-top: $m-size;
-  margin-left: $s-size;
+.form {
+  width: min-content;
 }
 
-.action__bar {
-  background-color: $action;
-  padding: .5rem 1rem;
-}
-
-.action__bar__button {
-  padding: .5rem;
-  background-color: $main-color;
-  color: $text-color-light;
-  border: none;
-}
-
-.action__bar__button--signout {
-  float: right;
-  padding: .5rem;
-  background-color: $action;
-  color: $text-color-light;
-  border: none;
+.input {
+  margin: $s-size;
+  display: block;
 }

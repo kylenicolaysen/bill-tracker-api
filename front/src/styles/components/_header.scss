@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  width: 90%;
+  margin-left: 5%;
+  padding: 1.75em $s-size;
+  border-bottom: 1px solid $text-color-medium;
+  background: $bg-color-header;
+}
+
+.header__title {
+  display: inline-block;
+}
+
+.header__title--subtitle {
+  margin-top: $m-size;
+  margin-left: $s-size;
+}
