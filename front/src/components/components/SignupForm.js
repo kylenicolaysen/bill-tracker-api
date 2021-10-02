@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 
 export default class SignupForm extends React.Component {
   state = {
-    signupError: false,
+    signupError: 0,
     token: ''
   }
 
@@ -21,7 +21,7 @@ export default class SignupForm extends React.Component {
     })
     const data = await response.json()
     if (response.status === 400) {
-      this.setState(() => ({ signupError: true }))
+      this.setState(() => ({ signupError: signupError + 1 }))
     }
     else {
       this.setState(() => ({ signupError: false }))
@@ -33,13 +33,15 @@ export default class SignupForm extends React.Component {
     }
   }
   render() {
+
     return (
-        <div className="auth__page">
-          {this.state.signupError && <p className="auth__form__error">invalid signup info provided</p>}
-          <form className="auth__form" onSubmit={ this.handleSignupFormSubmit }>
-            <input placeholder="Name" className="auth__input" type="text" name="name" />
-            <input placeholder="Email" className="auth__input" type="text" name="email" />
-            <input placeholder="Password" className="auth__input" type="password" name="password" />
+        <div className="page">
+          {(this.state.signupError > 0  && this.state.signupError < 5 ) && <p className="form--error">Please use a valid name, email and password.</p>}
+          {this.state.signupError > 4 && <p className="form--error">Really? It's taking you this many tries?</p>}
+          <form className="form" onSubmit={ this.handleSignupFormSubmit }>
+            <input placeholder="Name" className="input" type="text" name="name" />
+            <input placeholder="Email" className="input" type="text" name="email" />
+            <input placeholder="Password" className="input" type="password" name="password" />
             <button className="primary__submit__button">Sign Up</button>
           </form>
           <Link to="/login"><button className="secondary__submit__button">Log In</button></Link>

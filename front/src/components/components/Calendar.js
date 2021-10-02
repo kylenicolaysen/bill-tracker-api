@@ -112,6 +112,7 @@ export default class Calendar extends React.Component {
           >
             <span className="number">{formattedDate}</span>
             <span className="bg">{formattedDate}</span>
+            <span>+</span>
           </div>
         )
         day = add(day, {days: 1})

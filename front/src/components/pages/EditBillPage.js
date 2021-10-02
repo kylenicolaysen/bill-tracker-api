@@ -12,6 +12,10 @@ class EditBillPage extends React.Component {
     console.log(bill)
     this.setState(() => (bill))
   }
+  async componentWillUnmount() {
+    
+  }
+
   handleFormSubmit = () => {
     console.log('SUBMITTED')
   }
@@ -25,16 +29,23 @@ class EditBillPage extends React.Component {
         <form className="form" onSubmit={this.handleFormSubmit}>
           <input 
             className="input" 
-            placeholder={this.state.description}
+            placeholder="Description"
+            value={this.state.description === "New Bill" ? undefined : this.state.description}
             type="text"
             name="description"
           />
           <input 
             className="input" 
-            placeholder={this.state.amount}
+            value={this.state.amount}
             type="text"
             name="amount"
           />
+          <p className="input">Date Input</p>
+          <select className="input">
+            <option>Annually</option>
+            <option>Monthly</option>
+            <option>Weekly</option>
+          </select>
           <button className="submit__button">save</button>
         </form>
       </div>

@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 
 export default class LoginForm extends React.Component {
   state = {
-    loginError: false,
+    loginError: 0,
     token: ''
   }
   handleLoginFormSubmit = async (e) => {
@@ -19,10 +19,10 @@ export default class LoginForm extends React.Component {
     })
     const data = await response.json()
     if (response.status === 400) {
-      this.setState(() => ({ loginError: true }))
+      this.setState(() => ({ loginError: this.state.loginError + 1 }))
     }
     else {
-      this.setState(() => ({ loginError: false }))
+      this.setState(() => ({ loginError: 0 }))
       this.props.onSubmit({
         authSuccess: true,
         token: data.token
@@ -34,7 +34,8 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <div className="page">
-        {this.state.loginError && <p className="auth__form__error">invalid email or password</p>}
+      {(this.state.loginError > 0  && this.state.loginError < 3) && <p className="form--error">Invalid email or password</p>}
+        {this.state.loginError > 2 && <p className="form--error">I'm starting to think you don't know your login info...</p>}
         <form className="form" onSubmit={ this.handleLoginFormSubmit }>
           <input placeholder="Email" className="input" type="text" name="email" />
           <input placeholder="Password" className="input" type="password" name="password" />

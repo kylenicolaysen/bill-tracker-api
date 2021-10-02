@@ -16,3 +16,8 @@
   border: none;
   font-weight: bold;
 }
+
+.form--error {
+  color: red;
+  margin-left: $s-size;
+}
