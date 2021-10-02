@@ -8,7 +8,7 @@ export default class SignupForm extends React.Component {
     token: ''
   }
   getErrorString(obj) {
-    return Object.keys(obj).map(function(k) { return k }).join(', ')
+    return Object.keys(obj).map(function(k) { return k }).join(' | ').toUpperCase()
   }
 
   handleSignupFormSubmit = async (e) => {
@@ -27,7 +27,7 @@ export default class SignupForm extends React.Component {
     if (response.status === 400) {      
       this.setState(() => ({ signupErrorCount: this.state.signupErrorCount + 1, signupError: data.errors }))
     }
-    else {
+    else if (response.status === 200) {
       this.setState(() => ({ signupErrorCount: 0, signupError: undefined }))
       this.props.onSubmit({
         authSuccess: true,
@@ -43,8 +43,9 @@ export default class SignupForm extends React.Component {
     }
     return (
         <div className="page">
-          {(this.state.signupErrorCount > 0  && this.state.signupErrorCount < 5 ) ? <span className="form--error">Please use a valid: {error}</span>: <div></div>}
-          {this.state.signupErrorCount > 4 ? <span className="form--error">Come on, I believe in you!</span> : <div></div>}
+          {this.state.signupErrorCount === 0 && <span className="form--error hidden">~</span>}
+          {(this.state.signupErrorCount > 0  && this.state.signupErrorCount < 5 ) && <span className="form--error">Please use valid: {error}</span>}
+          {this.state.signupErrorCount > 4 && <span className="form--error">Come on, I believe in you!</span>}
           <form className="form" onSubmit={ this.handleSignupFormSubmit }>
             <input placeholder="Name" className="input" type="text" name="name" />
             <input placeholder="Email" className="input" type="text" name="email" />
