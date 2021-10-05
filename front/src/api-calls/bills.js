@@ -22,3 +22,7 @@ export const getBillById = async (token, id) => {
   const data = await response.json()
   return data
 }
+
+export const getAllBills = async (token) => {
+  
+}
