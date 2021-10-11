@@ -130,7 +130,7 @@ export default class Calendar extends React.Component {
   render() {
     return (
       <div className="calendar">
-        {this.renderActionBar()}
+        <ActionBar />
         {this.renderCalendarHeader()}
         {this.renderDays()}
         {this.renderCells()}

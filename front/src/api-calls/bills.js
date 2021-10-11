@@ -24,5 +24,13 @@ export const getBillById = async (token, id) => {
 }
 
 export const getAllBills = async (token) => {
-  
+  const response = await fetch('/api/expenses', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  const data = await response.json()
+  return data
 }

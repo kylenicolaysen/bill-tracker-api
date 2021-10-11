@@ -1,32 +1,19 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { getAllBills } from '../../api-calls/bills'
+import { connect } from 'react-redux'
+import BillsList from '../components/BillsList'
+import ActionBar from '../components/ActionBar'
 
-class BillsDashboardPage extends React.Component {
-  state = {}
-  async componentDidMount() {
-    const id = this.props.location.hash.substring(1)
-    const bills = await getAllBills(this.props.token)
-    console.log(bills)
-    this.setState(() => (bills))
+const BillsDashboardPage = (props) => {
+  if (!props.isAuthenticated) {
+    return <Redirect to="/login" />
   }
-
-  getExpenses() {
-    return
-  }
-
-  render() {
-    if (!this.props.isAuthenticated) {
-      return <Redirect to="/login" />
-    }
-    return (
-      <div className="page">
-        Bill Page
-        <button onClick={this.getExpenses()}>Clack</button>
-      </div>
-    )
-  }
+  return (
+    <div className="page">
+      <ActionBar activePage="bills-dashboard" />
+      <BillsList userToken = {props.token} />
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {

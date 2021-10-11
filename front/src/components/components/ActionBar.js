@@ -3,26 +3,32 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { isNotAuthd } from '../../actions/authentication'
 
-const ActionBar = (props) => (
+const ActionBar = (props) => {
+return (
   <div className="action__bar">
     <button
-      className="action__bar__button"
-      onClick={() => props.history.push('/add-bill')}
+      className={props.activePage==='add-bill' ? 'action__bar__button--active' : 'action__bar__button'}
+      onClick={() => {
+        if (props.activePage==='add-bill') {
+          return
+        }
+        props.history.push('/add-bill')
+      }}
     >Add Bill</button>
     <button
-      className="action__bar__button"
+      className={props.activePage==='bills-dashboard' ? 'action__bar__button--active' : 'action__bar__button'}
       onClick={() => props.history.push('/bills-dashboard')}
-    >View Expenses</button>
+    >All Bills</button>
     <button
-      className="action__bar__button--signout"
+      className="action__bar__button--secondary"
       onClick={() => {props.dispatch(isNotAuthd())}}
     >Sign Out</button>
     <button
-      className="action__bar__button--signout"
-      onClick={() => {console.log('profile button clicked')}}
+      className="action__bar__button--secondary"
+      onClick={() => props.history.push('/profile')}
     >Profile</button>
   </div>
-)
+)}
 
 const mapStateToProps = () => {
   return {}

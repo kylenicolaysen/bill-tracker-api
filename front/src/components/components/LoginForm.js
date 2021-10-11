@@ -33,7 +33,7 @@ export default class LoginForm extends React.Component {
 
   render() {
     return (
-      <div className="page">
+      <div className="page-content">
         {this.state.loginErrorCount === 0 && <p className="form--error hidden">~</p>}
         {(this.state.loginErrorCount > 0  && this.state.loginErrorCount < 3) && <p className="form--error">Invalid email or password</p>}
         {this.state.loginErrorCount > 2 && <p className="form--error">I'm starting to think you don't know your login info...</p>}

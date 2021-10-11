@@ -6,6 +6,7 @@ import AddBillPage from '../components/pages/AddBillPage'
 import EditBillPage from '../components/pages/EditBillPage'
 import CalendarPage from '../components/pages/CalendarPage'
 import BillsDashboardPage from '../components/pages/BillsDashboardPage'
+import ProfilePage from '../components/pages/ProfilePage'
 import NotFoundPage from '../components/pages/NotFoundPage'
 
 
@@ -20,6 +21,7 @@ const AppRouter = () => (
         <Route path='/add-bill' component={AddBillPage} />
         <Route path='/bill' component={EditBillPage} />
         <Route path="/bills-dashboard" component={BillsDashboardPage} />
+        <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

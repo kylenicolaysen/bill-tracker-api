@@ -24,10 +24,14 @@ export default class BillForm extends React.Component {
       this.setState(() => ({ dueDate }))
     }
   }
+  onFormSubmit = (e) => {
+    e.preventDefault()
+  }
+
   render() {
     return (
-      <div className="page">
-        <form className="form" onSubmit={()=>{console.log('xxx')}}>
+      <div>
+        <form className="form" onSubmit={this.onFormSubmit}>
           <input 
             className="input" 
             placeholder="Description"

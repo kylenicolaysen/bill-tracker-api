@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getBillById } from '../../api-calls/bills'
 import BillForm from '../components/BillForm'
+import ActionBar from '../components/ActionBar'
 
 
 class EditBillPage extends React.Component {
@@ -17,11 +18,13 @@ class EditBillPage extends React.Component {
       return <Redirect to="/login" />
     }
     return (
-      <div>
-        <h1>Edit Bill</h1>
-        <BillForm 
-          bill={this.state.bill}
-        />
+      <div className="page">
+        <ActionBar />
+        <div className="page-content">
+          <BillForm 
+            bill={this.state.bill}
+          />
+        </div>
       </div>
     )
   }

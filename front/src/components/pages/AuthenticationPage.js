@@ -5,7 +5,7 @@ import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 import { isAuthd, isNotAuthd } from '../../actions/authentication'
 
-class LoginPage extends React.Component {
+class AuthenticationPage extends React.Component {
   formSubmit = ({ authSuccess, token }) => {
     authSuccess ? 
       this.props.dispatch(isAuthd(token)) : 
@@ -20,14 +20,14 @@ class LoginPage extends React.Component {
     }
     else if (this.props.location.pathname === '/login') {
       return (
-        <div>
+        <div className="page">
           <LoginForm onSubmit={this.formSubmit} />
         </div>        
       )
     }
     else if (this.props.location.pathname === '/signup') {
       return (
-        <div>
+        <div className="page">
           <SignupForm
             onSubmit={this.formSubmit}
           />
@@ -43,4 +43,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(LoginPage)
+export default connect(mapStateToProps)(AuthenticationPage)

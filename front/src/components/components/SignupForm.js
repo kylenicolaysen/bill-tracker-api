@@ -42,7 +42,7 @@ export default class SignupForm extends React.Component {
       error = this.getErrorString(this.state.signupError)
     }
     return (
-        <div className="page">
+        <div className="page-content">
           {this.state.signupErrorCount === 0 && <span className="form--error hidden">~</span>}
           {(this.state.signupErrorCount > 0  && this.state.signupErrorCount < 5 ) && <span className="form--error">Please use valid: {error}</span>}
           {this.state.signupErrorCount > 4 && <span className="form--error">Come on, I believe in you!</span>}
