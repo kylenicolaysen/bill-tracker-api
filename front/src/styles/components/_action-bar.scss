@@ -26,3 +26,11 @@
   color: $text-color-light;
   border: none;
 }
+
+.action__bar__button--secondary--active {
+  float: right;
+  padding: .5rem;
+  background-color: $action;
+  color: $text-color-medium;
+  border: none;
+}

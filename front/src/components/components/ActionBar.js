@@ -17,15 +17,25 @@ return (
     >Add Bill</button>
     <button
       className={props.activePage==='bills-dashboard' ? 'action__bar__button--active' : 'action__bar__button'}
-      onClick={() => props.history.push('/bills-dashboard')}
+      onClick={() => {
+        if (props.activePage==='bills-dashboard') {
+          return
+        }
+        props.history.push('/bills-dashboard')
+      }}
     >All Bills</button>
     <button
       className="action__bar__button--secondary"
       onClick={() => {props.dispatch(isNotAuthd())}}
     >Sign Out</button>
     <button
-      className="action__bar__button--secondary"
-      onClick={() => props.history.push('/profile')}
+      className={props.activePage==='profile' ? 'action__bar__button--secondary--active' : 'action__bar__button--secondary'}
+      onClick={() => {
+        if (props.activePage==='profile') {
+          return
+        }
+        props.history.push('/profile')
+      }}
     >Profile</button>
   </div>
 )}

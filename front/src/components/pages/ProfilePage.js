@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import ActionBar from '../components/ActionBar'
 
 
-class EditBillPage extends React.Component {
+class ProfilePage extends React.Component {
   state = {}
   //LOAD USER DATA HERERERERERER
   // async componentDidMount() {
@@ -15,10 +17,14 @@ class EditBillPage extends React.Component {
       return <Redirect to="/login" />
     }
     return (
-    <div>
-      <p>PROFILEPAGE HERE </p>
-    </div>
-  )}
+      <div className="page">
+        <ActionBar activePage="profile" />
+        <div className="page-content">
+          <p>User Profile</p>
+        </div>
+      </div>
+    )
+  }
 }
 const mapStateToProps = (state) => {
   return {
@@ -27,4 +33,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(EditBillPage)
+export default connect(mapStateToProps)(ProfilePage)
