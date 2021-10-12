@@ -11,7 +11,7 @@ const BillsDashboardPage = (props) => {
   return (
     <div className="page">
       <ActionBar activePage="bills-dashboard" />
-      <BillsList userToken = {props.token} />
+      <BillsList billsList = {props.billsList} />
     </div>
   )
 }
@@ -19,7 +19,7 @@ const BillsDashboardPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    token: state.authentication.token
+    billsList: state.bills
   }
 }
 

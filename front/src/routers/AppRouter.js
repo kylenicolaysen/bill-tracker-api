@@ -19,7 +19,7 @@ const AppRouter = () => (
         <Route path='/login' component={AuthenticationPage} />
         <Route path='/signup' component={AuthenticationPage} />
         <Route path='/add-bill' component={AddBillPage} />
-        <Route path='/bill' component={EditBillPage} />
+        <Route path='/edit-bill' component={EditBillPage} />
         <Route path="/bills-dashboard" component={BillsDashboardPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />

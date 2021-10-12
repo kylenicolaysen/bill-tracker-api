@@ -34,3 +34,15 @@ export const getAllBills = async (token) => {
   const data = await response.json()
   return data
 }
+
+export const removeBillById = async (token, id) => {
+  const response = await fetch('/api/expenses', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+  const data = await response.json()
+  return data
+}

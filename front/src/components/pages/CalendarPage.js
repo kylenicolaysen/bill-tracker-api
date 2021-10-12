@@ -1,21 +1,42 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { getAllBills } from '../../api-calls/bills'
+import { setBillsList } from '../../actions/bills'
 import Calendar from '../components/Calendar'
 
-const CalendarPage = (props) => {
-  if (props.isAuthenticated) {
-    return (<Calendar />)
+class CalendarPage extends React.Component {
+  componentDidMount() {
+    this._asyncRequest = getAllBills(this.props.token).then(
+      externalData => {
+        this._asyncRequest = null
+        console.log(externalData)
+        this.props.dispatch(setBillsList(externalData))
+        // this.setState({ billList: externalData})
+      }
+    )
   }
-  else {
-    return <Redirect to="/login" />
+
+  componentWillUnmount() {
+    if (this._asyncRequest) {
+      this._asyncRequest.cancel()
+    }
   }
+  render() {
+    if (this.props.isAuthenticated) {
+      return (<Calendar />)
+    }
+    else {
+      return <Redirect to="/login" />
+    }
+  } 
 }
 
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    token: state.authentication.token
+    token: state.authentication.token,
+    billsList: state.bills
   }
 }
 
