@@ -3,7 +3,7 @@ export default (state = [], action) => {
     case 'ADD_BILL':
       return [...state, action.bill]
     case 'REMOVE_BILL':
-      return state.filter((bill) => bill._id !== action._id)
+      return state.filter((bill) => bill._id !== action.id)
     case 'SET_BILLS_LIST':
       return action.billsList
     default:

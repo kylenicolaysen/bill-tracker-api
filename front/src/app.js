@@ -6,7 +6,7 @@ import configureStore from './store/configureStore'
 import 'normalize.css'
 import './styles/styles.scss'
 import "core-js/stable";
-// import "regenerator-runtime/runtime";
+import "regenerator-runtime/runtime";
 
 const store = configureStore()
 

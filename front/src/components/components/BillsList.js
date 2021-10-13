@@ -29,7 +29,8 @@ const BillsList = (props) => {
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authentication.isAuthenticated,
-    token: state.authentication.token
+    token: state.authentication.token,
+    billsList: state.bills
   }
 }
 

@@ -1,10 +1,12 @@
 import React from 'react'
-import moment, { isMoment } from 'moment'
+import moment from 'moment'
+import { connect } from 'react-redux'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import { SingleDatePicker } from 'react-dates'
+import { addNewBill } from '../../api-calls/bills'
 
-export default class BillForm extends React.Component {
+class BillForm extends React.Component {
   constructor(props) {
     super(props)
 
@@ -25,7 +27,10 @@ export default class BillForm extends React.Component {
     }
   }
   onFormSubmit = (e) => {
+    console.log('submited? ', e)
     e.preventDefault()
+    addNewBill(this.props.token)
+    this.props.history.push('/')
   }
 
   render() {
@@ -66,3 +71,11 @@ export default class BillForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.authentication.isAuthenticated,
+    token: state.authentication.token
+  }
+}
+
+export default connect(mapStateToProps)(BillForm)

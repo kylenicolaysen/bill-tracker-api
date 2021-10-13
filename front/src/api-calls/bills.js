@@ -36,7 +36,7 @@ export const getAllBills = async (token) => {
 }
 
 export const removeBillById = async (token, id) => {
-  const response = await fetch('/api/expenses', {
+  const response = await fetch(`/api/expense/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
