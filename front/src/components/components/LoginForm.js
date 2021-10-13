@@ -17,6 +17,9 @@ export default class LoginForm extends React.Component {
       },
       body: JSON.stringify({ email, password })
     })
+    if (response.status === 500 || response.status === 504) {
+      return this.setState(() => ({ loginErrorCount: -1 }))
+    }
     const data = await response.json()
     if (response.status === 400) {
       this.setState(() => ({ loginErrorCount: this.state.loginErrorCount + 1 }))
@@ -35,6 +38,7 @@ export default class LoginForm extends React.Component {
     return (
       <div className="page-content">
         {this.state.loginErrorCount === 0 && <p className="form--error hidden">~</p>}
+        {this.state.loginErrorCount === -1 && <p className="form--error">Server Error ::: Please Try Again Later</p>}
         {(this.state.loginErrorCount > 0  && this.state.loginErrorCount < 3) && <p className="form--error">Invalid email or password</p>}
         {this.state.loginErrorCount > 2 && <p className="form--error">I'm starting to think you don't know your login info...</p>}
         <form className="form" onSubmit={ this.handleLoginFormSubmit }>

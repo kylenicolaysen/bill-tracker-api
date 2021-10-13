@@ -23,6 +23,9 @@ export default class SignupForm extends React.Component {
       },
       body: JSON.stringify({ name, email, password })
     })
+    if (response.status === 500 || response.sstatus === 504) {
+      return this.setState(() => ({signupErrorCount: -1}))
+    }
     const data = await response.json()
     if (response.status === 400) {      
       this.setState(() => ({ signupErrorCount: this.state.signupErrorCount + 1, signupError: data.errors }))
@@ -44,6 +47,7 @@ export default class SignupForm extends React.Component {
     return (
         <div className="page-content">
           {this.state.signupErrorCount === 0 && <span className="form--error hidden">~</span>}
+          {this.state.signupErrorCount === -1 && <p className="form--error">Server Error ::: Please Try Again Later</p>}
           {(this.state.signupErrorCount > 0  && this.state.signupErrorCount < 5 ) && <span className="form--error">Please use valid: {error}</span>}
           {this.state.signupErrorCount > 4 && <span className="form--error">Come on, I believe in you!</span>}
           <form className="form" onSubmit={ this.handleSignupFormSubmit }>

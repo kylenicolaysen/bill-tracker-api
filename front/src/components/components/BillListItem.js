@@ -13,7 +13,7 @@ const BillListItem = ({token, _id, description, amount, createdAt, dispatch }) =
         <h3>{description}</h3>
       </Link>
       <p>{amount} - {createdAt}</p>
-      <button 
+      <button
         className="submit__button"
         onClick={async () => {
           await removeBillById(token, _id)
