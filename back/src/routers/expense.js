@@ -5,6 +5,7 @@ const router = new express.Router()
 
 //CREATE EXPENSE
 router.post('/expense', auth, async (req, res) => {
+  console.log('CREATE EXPENSE')
   const expense = new Expense({
     ...req.body,
     owner: req.user._id
@@ -19,6 +20,7 @@ router.post('/expense', auth, async (req, res) => {
 
 //GET ALL EXPENSES OF USER
 router.get('/expenses', auth, async (req, res) => {
+  console.log('GET ALL EXPENSES')
   try {
     await req.user.populate({
       path: 'expenses'
@@ -30,6 +32,7 @@ router.get('/expenses', auth, async (req, res) => {
 })
 //GET EXPENSE by ID
 router.get('/expense/:id', auth, async (req, res) => {
+  console.log('GET EXPENSE')
   const _id = req.params.id
   console.log(_id)
   try {
@@ -46,6 +49,7 @@ router.get('/expense/:id', auth, async (req, res) => {
 
 //UPDATE EXPENSE
 router.patch('/expense/:id', auth, async (req, res) => {
+  console.log('UPDATE EXPENSE')
   const updates = Object.keys(req.body)
   const allowedUpdates = ['description', 'amount', 'frequency']
   const isValidUpdate = updates.every((update) => {
@@ -70,6 +74,7 @@ router.patch('/expense/:id', auth, async (req, res) => {
 
 //DELETE EXPENSE
 router.delete('/expense/:id', auth, async (req, res) => {
+  console.log('DELETE EXPENSE')
   try {
     const expense = await Expense.findOneAndDelete({ _id: req.params.id })
     if(!expense) {

@@ -1,70 +1,109 @@
 import React from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import { SingleDatePicker } from 'react-dates'
 import { addNewBill } from '../../api-calls/bills'
+import { addBill } from '../../actions/bills'
 
 class BillForm extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      description: '',
+      title: '',
       amount: 0,
-      dueDate: 0,
+      date: 456456456,
+      frequency: 'monthly',
       calendarFocused: false,
       error: ''
     }
   }
-  onFocusChange = ({ focused }) => {
-    this.setState(() => ({ calendarFocused: focused }))
+  onDescriptionChange = (e) => {
+    const title = e.target.value
+    this.setState(() => ({title}))
+  }
+  onAmountChange = (e) => {
+    const amount = e.target.value
+    if(!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+      this.setState(() => ({ amount }))
+    }
   }
   onDateChange = (dueDate) => {
     if (dueDate) {
       this.setState(() => ({ dueDate }))
     }
   }
+  onFocusChange = ({ focused }) => {
+    this.setState(() => ({ calendarFocused: focused }))
+  }
+  onFrequencyChange = (e) => {
+    this.setState(() => ({ frequency: e.target.value.toLowerCase()}))
+  }
   onFormSubmit = (e) => {
-    console.log('submited? ', e)
     e.preventDefault()
-    addNewBill(this.props.token)
-    this.props.history.push('/')
+    const newBill = {
+      title: this.state.title,
+      amount: parseFloat(this.state.amount, 10) * 100,
+      date: this.state.date,
+      frequency: this.state.frequency
+    }
+    addNewBill(this.props.token, newBill)
+    this.props.dispatch(addBill(newBill))
+    return <Redirect to="/bills-dashboard" />
   }
 
   render() {
+    const date = moment()
     return (
       <div>
-        <form className="form" onSubmit={this.onFormSubmit}>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form className="form">
+          <label for="title">
+          Title
           <input 
             className="input" 
             placeholder="Description"
-            // value={this.state.description === "New Bill" ? undefined : this.state.description}
+            onChange={this.onDescriptionChange}
             type="text"
-            name="description"
-          />
+            name="title"
+          /></label>
+          <label for="amount">
+          Amount
           <input 
-            className="input" 
-            // value={this.state.amount}
             type="text"
-            name="amount"
-          />
+            className="input" 
+            name="Amount"
+            value={this.state.amount}
+            onChange={this.onAmountChange}
+          /></label>
+          <label for="Next Due Date">
+          Next Due Date
           <div className="input">
             <SingleDatePicker
-              date={moment()}
+              date={date}
               onDateChange={this.onDateChange}
               focused={this.state.calendarFocused}
               onFocusChange={this.onFocusChange}
               numberOfMonths={1}
             />
-          </div>
-          <select className="input">
-            <option>Annually</option>
-            <option>Monthly</option>
-            <option>Weekly</option>
-          </select>
-          <button className="submit__button">save</button>
+          </div></label>
+          <label for="frequency">
+          Due Every
+          <select 
+            className="input"
+            onChange={this.onFrequencyChange}
+            name="frequency"
+          >
+            <option>Year</option>
+            <option defaultValue>Month</option>
+            <option>Two Months</option>
+            <option>Week</option>
+            <option>Two Weeks</option>
+          </select></label>
+          <button className="submit__button" onClick={this.onFormSubmit}>save</button>
         </form>
       </div>
     )

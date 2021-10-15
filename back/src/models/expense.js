@@ -1,9 +1,13 @@
 const mongoose = require('mongoose')
 
 const expenseSchema = new mongoose.Schema({
-  description: {
+  title: {
     type: String,
     required: true,
+    trim: true
+  },
+  details: {
+    type: String,
     trim: true
   },
   amount: {

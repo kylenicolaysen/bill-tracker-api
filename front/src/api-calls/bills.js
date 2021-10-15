@@ -1,11 +1,11 @@
-export const addNewBill = async (token) => {
+export const addNewBill = async (token, bill) => {
   const response = await fetch('/api/expense', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ description: 'New Bill', amount: 50 })
+    body: JSON.stringify({ title: bill.title, amount: bill.amount, frequency: bill.frequency, date: bill.date })
   })
   const data = await response.json()
   return data
