@@ -7,14 +7,17 @@ import Calendar from '../components/Calendar'
 
 class CalendarPage extends React.Component {
   componentDidMount() {
-    this._asyncRequest = getAllBills(this.props.token).then(
-      externalData => {
-        this._asyncRequest = null
-        console.log(externalData)
-        this.props.dispatch(setBillsList(externalData))
-        // this.setState({ billList: externalData})
-      }
-    )
+    if(this.props.token) {
+      this._asyncRequest = getAllBills(this.props.token).then(
+        externalData => {
+          this._asyncRequest = null
+          console.log(externalData)
+          this.props.dispatch(setBillsList(externalData))
+          // this.setState({ billList: externalData})
+        }
+      )
+    }
+    
   }
 
   componentWillUnmount() {

@@ -13,7 +13,7 @@ class BillForm extends React.Component {
     super(props)
 
     this.state = {
-      title: '',
+      description: '',
       amount: 0,
       date: 456456456,
       frequency: 'monthly',
@@ -22,8 +22,8 @@ class BillForm extends React.Component {
     }
   }
   onDescriptionChange = (e) => {
-    const title = e.target.value
-    this.setState(() => ({title}))
+    const description = e.target.value
+    this.setState(() => ({description}))
   }
   onAmountChange = (e) => {
     const amount = e.target.value
@@ -31,21 +31,22 @@ class BillForm extends React.Component {
       this.setState(() => ({ amount }))
     }
   }
-  onDateChange = (dueDate) => {
-    if (dueDate) {
-      this.setState(() => ({ dueDate }))
+  onDateChange = (date) => {
+    console.log(date)
+    if (date) {
+      this.setState(() => ({ date }))
     }
   }
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }))
   }
   onFrequencyChange = (e) => {
-    this.setState(() => ({ frequency: e.target.value.toLowerCase()}))
+    this.setState(() => ({ frequency: e.target.value}))
   }
   onFormSubmit = (e) => {
     e.preventDefault()
     const newBill = {
-      title: this.state.title,
+      description: this.state.description,
       amount: parseFloat(this.state.amount, 10) * 100,
       date: this.state.date,
       frequency: this.state.frequency
@@ -61,48 +62,53 @@ class BillForm extends React.Component {
       <div>
         {this.state.error && <p>{this.state.error}</p>}
         <form className="form">
-          <label for="title">
-          Title
-          <input 
-            className="input" 
-            placeholder="Description"
-            onChange={this.onDescriptionChange}
-            type="text"
-            name="title"
-          /></label>
-          <label for="amount">
-          Amount
-          <input 
-            type="text"
-            className="input" 
-            name="Amount"
-            value={this.state.amount}
-            onChange={this.onAmountChange}
-          /></label>
-          <label for="Next Due Date">
-          Next Due Date
-          <div className="input">
-            <SingleDatePicker
-              date={date}
-              onDateChange={this.onDateChange}
-              focused={this.state.calendarFocused}
-              onFocusChange={this.onFocusChange}
-              numberOfMonths={1}
+          <label htmlFor="description">
+            Title
+            <input 
+              className="input" 
+              placeholder="Title"
+              onChange={this.onDescriptionChange}
+              type="text"
+              name="description"
             />
-          </div></label>
-          <label for="frequency">
-          Due Every
-          <select 
-            className="input"
-            onChange={this.onFrequencyChange}
-            name="frequency"
-          >
-            <option>Year</option>
-            <option defaultValue>Month</option>
-            <option>Two Months</option>
-            <option>Week</option>
-            <option>Two Weeks</option>
-          </select></label>
+          </label>
+          <label htmlFor="amount">
+            Amount
+            <input 
+              type="text"
+              className="input" 
+              name="Amount"
+              value={this.state.amount}
+              onChange={this.onAmountChange}
+            />
+          </label>
+          <label htmlFor="Next Due Date">
+            Next Due Date
+            <div className="input">
+              <SingleDatePicker
+                date={date}
+                onDateChange={this.onDateChange}
+                focused={this.state.calendarFocused}
+                onFocusChange={this.onFocusChange}
+                numberOfMonths={1}
+              />
+            </div>
+          </label>
+          <label htmlFor="frequency">
+            Due Every
+            <select 
+              className="input"
+              onChange={this.onFrequencyChange}
+              name="frequency"
+              defaultValue="month"
+            >
+              <option value="year">Year</option>
+              <option value="month">Month</option>
+              <option value="two months">Two Months</option>
+              <option value="week">Week</option>
+              <option value="two weeks">Two Weeks</option>
+            </select>
+          </label>
           <button className="submit__button" onClick={this.onFormSubmit}>save</button>
         </form>
       </div>

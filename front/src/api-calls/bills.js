@@ -5,7 +5,7 @@ export const addNewBill = async (token, bill) => {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify({ title: bill.title, amount: bill.amount, frequency: bill.frequency, date: bill.date })
+    body: JSON.stringify({ description: bill.description, amount: bill.amount, frequency: bill.frequency, date: bill.date })
   })
   const data = await response.json()
   return data

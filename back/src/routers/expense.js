@@ -5,16 +5,20 @@ const router = new express.Router()
 
 //CREATE EXPENSE
 router.post('/expense', auth, async (req, res) => {
-  console.log('CREATE EXPENSE')
+  
   const expense = new Expense({
     ...req.body,
     owner: req.user._id
   })
+  console.log('CREATE EXPENSE: ', expense)
   try {
     await expense.save()
     res.status(201).send(expense)
   } catch (e) {
-    res.status(400).send(e)
+    console.log(e)
+    res.status(400).json({
+      error: e.Error
+    })
   }
 })
 
