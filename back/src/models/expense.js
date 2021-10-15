@@ -32,6 +32,8 @@ const expenseSchema = new mongoose.Schema({
 expenseSchema.pre('save', function (next) {
   const validFrequencies = [ 'year', 'month', 'two months', 'week', 'two weeks' ]
   const expense = this
+  console.log(expense.frequency)
+
   if(expense.isModified('frequency') && (validFrequencies.find((freq) => expense.frequency === freq) === undefined)) {
     return next(new Error('invalid frequency'))
   }

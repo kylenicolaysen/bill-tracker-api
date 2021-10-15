@@ -15,10 +15,11 @@ class BillForm extends React.Component {
     this.state = {
       description: '',
       amount: 0,
-      date: 456456456,
-      frequency: 'monthly',
+      date: moment(),
+      frequency: 'month',
       calendarFocused: false,
-      error: ''
+      error: '',
+      redirect: false
     }
   }
   onDescriptionChange = (e) => {
@@ -43,7 +44,7 @@ class BillForm extends React.Component {
   onFrequencyChange = (e) => {
     this.setState(() => ({ frequency: e.target.value}))
   }
-  onFormSubmit = (e) => {
+  onFormSubmit = async (e) => {
     e.preventDefault()
     const newBill = {
       description: this.state.description,
@@ -51,17 +52,25 @@ class BillForm extends React.Component {
       date: this.state.date,
       frequency: this.state.frequency
     }
-    addNewBill(this.props.token, newBill)
+    await addNewBill(this.props.token, newBill)
     this.props.dispatch(addBill(newBill))
-    return <Redirect to="/bills-dashboard" />
+    this.setState(() => ({ redirect: true }))
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/bills-dashboard" />
+    }
+  }
   render() {
-    const date = moment()
     return (
       <div>
+        {this.renderRedirect()} 
         {this.state.error && <p>{this.state.error}</p>}
-        <form className="form">
+        <form 
+          className="form"
+          onSubmit={this.onFormSubmit}
+        >
           <label htmlFor="description">
             Title
             <input 
@@ -86,7 +95,7 @@ class BillForm extends React.Component {
             Next Due Date
             <div className="input">
               <SingleDatePicker
-                date={date}
+                date={this.state.date}
                 onDateChange={this.onDateChange}
                 focused={this.state.calendarFocused}
                 onFocusChange={this.onFocusChange}
@@ -109,7 +118,7 @@ class BillForm extends React.Component {
               <option value="two weeks">Two Weeks</option>
             </select>
           </label>
-          <button className="submit__button" onClick={this.onFormSubmit}>save</button>
+          <button  className="submit__button">save</button>
         </form>
       </div>
     )

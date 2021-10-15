@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export default class LoginForm extends React.Component {
   state = {
@@ -30,7 +30,6 @@ export default class LoginForm extends React.Component {
         authSuccess: true,
         token: data.token
       })
-      return <Redirect to="/" />
     }
   }
 

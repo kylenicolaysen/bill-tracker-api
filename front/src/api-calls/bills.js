@@ -1,4 +1,5 @@
 export const addNewBill = async (token, bill) => {
+  console.log(bill)
   const response = await fetch('/api/expense', {
     method: 'POST',
     headers: {
