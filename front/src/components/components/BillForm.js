@@ -33,7 +33,6 @@ class BillForm extends React.Component {
     }
   }
   onDateChange = (date) => {
-    console.log(date)
     if (date) {
       this.setState(() => ({ date }))
     }
@@ -44,7 +43,7 @@ class BillForm extends React.Component {
   onFrequencyChange = (e) => {
     this.setState(() => ({ frequency: e.target.value}))
   }
-  onFormSubmit = async (e) => {
+  onFormSubmit = (e) => {
     e.preventDefault()
     const newBill = {
       description: this.state.description,
@@ -52,8 +51,8 @@ class BillForm extends React.Component {
       date: this.state.date,
       frequency: this.state.frequency
     }
-    await addNewBill(this.props.token, newBill)
-    this.props.dispatch(addBill(newBill))
+    const newerBill = addNewBill(this.props.token, newBill)
+    this.props.dispatch(addBill(newerBill))
     this.setState(() => ({ redirect: true }))
   }
 

@@ -6,7 +6,7 @@ import { removeBill } from '../../actions/bills'
 
 
 
-const BillListItem = ({token, _id, description, amount, createdAt, dispatch }) => {
+const BillListItem = ({ token, _id, description, amount, createdAt, dispatch }) => {
   return (
     <div className="bill-item">
       <Link to={`/edit-bill/${_id}`}>  
