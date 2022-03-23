@@ -14,11 +14,12 @@ const BillListItem = ({ token, _id, description, amount, createdAt, dispatch }) 
       </Link>
       <p>{amount} - {createdAt}</p>
       <button
-        className="submit__button"
+        className="remove__button"
         onClick={async () => {
           await removeBillById(token, _id)
           dispatch(removeBill(_id))
-    }}>Remove</button>
+      }}>Remove</button>
+      <button>Pay Bill</button>
     </div>
   )
 } 

@@ -15,7 +15,7 @@ class AuthenticationPage extends React.Component {
   render() {
     if(this.props.isAuthenticated) {
       return (
-        <Redirect to="/" />
+        <Redirect to="/bills-dashboard" />
       )
     }
     else if (this.props.location.pathname === '/login') {
